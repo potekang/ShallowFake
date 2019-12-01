@@ -17,7 +17,7 @@ import module
 # ==============================================================================
 
 # command line
-py.arg('--dataset', default='fashion_mnist', choices=['cifar10', 'fashion_mnist', 'mnist', 'celeba', 'anime', 'custom'])
+py.arg('--dataset', default='fashion_mnist', choices=['cifar10', 'fashion_mnist', 'mnist', 'celeba', 'anime', 'japanese','custom'])
 py.arg('--batch_size', type=int, default=64)
 py.arg('--epochs', type=int, default=25)
 py.arg('--lr', type=float, default=0.0002)
@@ -60,6 +60,16 @@ elif args.dataset == 'anime':  # 64x64
     img_paths = py.glob('data/faces', '*.jpg')
     dataset, shape, len_dataset = data.make_anime_dataset(img_paths, args.batch_size)
     n_G_upsamplings = n_D_downsamplings = 4
+
+elif args.dataset == 'japanese':
+    img_paths = py.glob('./dataset/kkanji2', 'U+*')
+    imgs = []
+    for dir in img_paths:
+        list = py.glob(dir, '*.png')
+        for x in list:
+            imgs.append(x)
+    dataset, shape, len_dataset = data.make_custom_datset(imgs, args.batch_size)
+    n_G_upsamplings = n_D_downsamplings = 4  # 3 for 32x32 and 4 for 64x64
 
 elif args.dataset == 'custom':
     # ======================================
