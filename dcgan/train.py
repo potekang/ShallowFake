@@ -65,7 +65,7 @@ elif args.dataset == 'custom':
     # ======================================
     # =               custom               =
     # ======================================
-    img_paths = py.glob('/home/paiay/Desktop/DCGAN-LSGAN-WGAN-GP-DRAGAN-Tensorflow-2/dataset/chinese', '*.png') # image paths of custom dataset
+    img_paths = py.glob('./dataset/chinese', '*.png') # image paths of custom dataset
     dataset, shape, len_dataset = data.make_custom_datset(img_paths, args.batch_size)
     #dataset, shape, len_dataset = data.make_anime_dataset(img_paths, args.batch_size)
     n_G_upsamplings = n_D_downsamplings = 4  # 3 for 32x32 and 4 for 64x64
